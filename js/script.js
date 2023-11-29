@@ -15,15 +15,17 @@ const listenToClickGrid = function (data, img_urls) {
   const closeBtn = document.querySelector('.close-btn');
   const nextBtn = document.querySelector('.next-btn');
   const prevBtn = document.querySelector('.prev-btn');
-  let saved_current_nr = document.querySelector('.artist-nr').innerHTML;
 
   dialog.addEventListener('cancel', function () {
-    document.querySelector(`[data-nr="${saved_current_nr}"]`).scrollIntoView();
+    const current_nr = document.querySelector('.artist-nr').innerHTML;
+    document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
     body.classList.remove('dialog-open');
   });
 
   closeBtn.addEventListener('click', function () {
-    document.querySelector(`[data-nr="${saved_current_nr}"]`).scrollIntoView();
+    const current_nr = document.querySelector('.artist-nr').innerHTML;
+    document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
+    document.activeElement.blur();
     dialog.close();
     body.classList.remove('dialog-open');
   });
@@ -34,7 +36,6 @@ const listenToClickGrid = function (data, img_urls) {
     if (next_nr > 50) {
       next_nr = 1;
     }
-    saved_current_nr = next_nr;
     const next_id = data[next_nr - 1].track.artists[0].id;
     const next_name = data[next_nr - 1].track.artists[0].name;
     showModal(data, img_urls, next_id, next_nr, next_name);
@@ -46,7 +47,6 @@ const listenToClickGrid = function (data, img_urls) {
     if (prev_nr < 1) {
       prev_nr = 50;
     }
-    saved_current_nr = prev_nr;
     const prev_id = data[prev_nr - 1].track.artists[0].id;
     const prev_name = data[prev_nr - 1].track.artists[0].name;
     showModal(data, img_urls, prev_id, prev_nr, prev_name);
