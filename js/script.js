@@ -9,6 +9,18 @@ const authOptions = {
   data: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
 };
 
+const listenToClickGrid = function () {
+  const buttons = document.querySelectorAll('.grid-artist');
+  for (const button of buttons) {
+    button.addEventListener('click', function () {
+      const id = this.dataset.id;
+      const name = this.dataset.name;
+      console.log(id);
+      console.log(name);
+    });
+  }
+};
+
 const getGridData = async () => {
   try {
     const response = await axios.get('https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M', {
@@ -20,25 +32,26 @@ const getGridData = async () => {
     const data = response.data;
     let img_urls = [];
     for (const track of data.tracks.items) {
-        img_urls.push(await getArtistImg(track.track.artists[0].id));
+      img_urls.push(await getArtistImg(track.track.artists[0].id));
     }
-    showData(data.tracks.items, img_urls);
+    showGrid(data.tracks.items, img_urls);
   } catch (error) {
     console.error('Error:', error);
   }
 };
 
-const showData = (data, img_urls) => {
+const showGrid = (data, img_urls) => {
   let html = '';
   let i = 0;
   console.info(data);
   img_urls.forEach((url) => {
     i++;
-    html += `<button class="grid-artist o-button-reset" data-nr="${i}" data-name="${data[i-1].track.artists[0].name}" data-id="${data[i-1].track.artists[0].id}">
-            <img src="${url}" alt="${data[i-1].track.artists[0].name}">
+    html += `<button class="grid-artist o-button-reset" data-nr="${i}" data-name="${data[i - 1].track.artists[0].name}" data-id="${data[i - 1].track.artists[0].id}">
+            <img src="${url}" alt="${data[i - 1].track.artists[0].name}">
         </button>`;
   });
   document.querySelector('.js-container').innerHTML = html;
+  listenToClickGrid();
 };
 
 const getArtistImg = async (id) => {
