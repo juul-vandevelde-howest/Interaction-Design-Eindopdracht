@@ -67,14 +67,16 @@ const listenToClickGrid = function (data, img_urls) {
 
 const showModal = (data, img_urls, id, nr, name) => {
   getArtist(id).then((artist_data) => {
-    document.querySelector('.artist-followers').innerHTML = artist_data.followers.total;
-    document.querySelector('.artist-popularity').innerHTML = artist_data.popularity;
+    document.querySelector('.artist-genres').innerHTML = artist_data.genres.join(', ');
+    document.querySelector('.artist-followers-data').innerHTML = artist_data.followers.total.toLocaleString();
+    document.querySelector('.artist-followers-fill').style.width = (artist_data.followers.total / 115663373) * 100 + '%';
+    document.querySelector('.artist-popularity-data').innerHTML = artist_data.popularity + '%';
+    document.querySelector('.artist-popularity-fill').style.width = artist_data.popularity + '%';
   });
 
   document.querySelector('.artist-img').innerHTML = `<img src="${img_urls[nr - 1]}" alt="${name}">`;
   document.querySelector('.artist-name').innerHTML = name;
   document.querySelector('.artist-nr').innerHTML = nr;
-  document.querySelector('.artist-genres').innerHTML = '';
   document.querySelector('.artist-song-img').innerHTML = `<img src="${data[nr - 1].track.album.images[0].url}" alt="Album cover for song: ${data[nr - 1].track.name}">`;
   document.querySelector('.artist-song-name').innerHTML = data[nr - 1].track.name;
   document.querySelector('.artist-song-preview').innerHTML = `<audio controls><source src="${data[nr - 1].track.preview_url}" type="audio/mpeg">Your browser does not support the audio element.</audio>`;
@@ -97,6 +99,7 @@ const getGridData = async () => {
     showGrid(data.tracks.items, img_urls);
   } catch (error) {
     console.error('Error:', error);
+    localStorage.removeItem('access_token');
   }
 };
 
@@ -125,6 +128,7 @@ const getArtist = async (id) => {
     return data;
   } catch (error) {
     console.error('Error:', error);
+    localStorage.removeItem('access_token');
   }
 };
 

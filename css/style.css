@@ -27,7 +27,7 @@
 html {
   /* line-height: ; */
   font-family: 'Geist-Regular', Helvetica, arial, sans-serif;
-  /* font-size: ; */
+  font-size: 1rem;
   color: white;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -60,6 +60,11 @@ svg {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
 }
 
 button {
@@ -209,11 +214,6 @@ button {
   align-content: center;
 }
 
-.grid-artist img {
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-
 .modal {
   padding: 4rem;
   max-width: 100vw;
@@ -225,6 +225,119 @@ button {
   border: none;
 }
 
+.close-btn {
+  position: absolute;
+  top: 4rem;
+  right: 4rem;
+}
+
+.change-artist-btns {
+  position: absolute;
+  display: flex;
+  gap: 2rem;
+  bottom: 4rem;
+  right: 4rem;
+}
+
+.artist {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  height: 100%;
+}
+
+.artist-img-nr {
+  display: grid;
+  align-content: space-between;
+}
+
+.artist-img {
+  max-width: 28rem;
+}
+
+.artist-nr {
+  font-family: 'Geist-UltraBlack';
+  font-size: 14rem;
+  line-height: 0.8;
+}
+
+.artist-nr-info {
+  font-size: 2rem;
+}
+
+.artist-info {
+  display: grid;
+  grid-template-rows: auto auto 1fr 1fr;
+}
+
+.artist-name {
+  font-family: 'Geist-Bold';
+  font-size: 4rem;
+}
+
+.artist-genres {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.artist-song {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+
+.artist-song-img {
+  max-width: 10rem;
+}
+
+.artist-song-name {
+  font-family: 'Geist-Bold';
+  font-size: 2rem;
+}
+
+.artist-statistics-title {
+  font-family: 'Geist-Bold';
+  font-size: 3rem;
+}
+
+.artist-followers,
+.artist-popularity {
+  display: grid;
+  position: relative;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  font-size: 2rem;
+}
+
+.artist-followers-bar,
+.artist-popularity-bar {
+  height: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  position: relative;
+  grid-column: span 2;
+  margin-top: .25rem;
+}
+
+.artist-followers-fill, .artist-popularity-fill {
+  height: 100%;
+  background-color: var(--green);
+  width: 0;
+  position: absolute;
+}
+
+.artist-followers-fill {
+  width: 50%;
+}
+
+.artist-popularity-fill {
+  width: 80%;
+}
+
+.artist-followers {
+  margin: 2rem 0;
+}
 
 /*---------------------------------------/*
  # UTILITIES
