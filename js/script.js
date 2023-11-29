@@ -9,14 +9,36 @@ const authOptions = {
   data: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
 };
 
-const listenToClickGrid = function () {
+const listenToClickGrid = function (data, img_urls) {
+  let artist_data = '';
+  const body = document.querySelector('body');
+  const dialog = document.querySelector('.modal');
+  const closeBtn = document.querySelector('.close-btn');
+  closeBtn.addEventListener('click', function () {
+    dialog.close();
+    body.classList.remove('dialog-open');
+  });
+
   const buttons = document.querySelectorAll('.grid-artist');
   for (const button of buttons) {
     button.addEventListener('click', function () {
       const id = this.dataset.id;
+      getArtist(id).then((data) => {
+        artist_data = data;
+        document.querySelector('.artist-followers').innerHTML = artist_data.followers.total;
+        document.querySelector('.artist-popularity').innerHTML = artist_data.popularity;
+      });
+      const nr = this.dataset.nr;
       const name = this.dataset.name;
-      console.log(id);
-      console.log(name);
+      document.querySelector('.artist-img').innerHTML = `<img src="${img_urls[nr - 1]}" alt="${name}">`;
+      document.querySelector('.artist-name').innerHTML = name;
+      document.querySelector('.artist-nr').innerHTML = nr;
+      document.querySelector('.artist-genres').innerHTML = '';
+      document.querySelector('.artist-song-img').innerHTML = `<img src="${data[nr - 1].track.album.images[0].url}" alt="Album cover for song: ${data[nr - 1].track.name}">`;
+      document.querySelector('.artist-song-name').innerHTML = data[nr - 1].track.name;
+      document.querySelector('.artist-song-preview').innerHTML = `<audio controls><source src="${data[nr - 1].track.preview_url}" type="audio/mpeg">Your browser does not support the audio element.</audio>`;
+      dialog.showModal();
+      body.classList.add('dialog-open');
     });
   }
 };
@@ -32,7 +54,8 @@ const getGridData = async () => {
     const data = response.data;
     let img_urls = [];
     for (const track of data.tracks.items) {
-      img_urls.push(await getArtistImg(track.track.artists[0].id));
+      const data = await getArtist(track.track.artists[0].id)
+      img_urls.push(data.images[0].url);
     }
     showGrid(data.tracks.items, img_urls);
   } catch (error) {
@@ -51,10 +74,10 @@ const showGrid = (data, img_urls) => {
         </button>`;
   });
   document.querySelector('.js-container').innerHTML = html;
-  listenToClickGrid();
+  listenToClickGrid(data, img_urls);
 };
 
-const getArtistImg = async (id) => {
+const getArtist = async (id) => {
   try {
     const response = await axios.get(`https://api.spotify.com/v1/artists/${id}`, {
       headers: {
@@ -62,7 +85,7 @@ const getArtistImg = async (id) => {
       },
     });
     const data = response.data;
-    return data.images[0].url;
+    return data;
   } catch (error) {
     console.error('Error:', error);
   }
@@ -79,5 +102,8 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error fetching access token:', error.message);
       });
   }
-  getGridData();
+  if (localStorage.getItem('access_token')) {
+    console.log('Access Token:', localStorage.getItem('access_token'));
+    getGridData();
+  }
 });

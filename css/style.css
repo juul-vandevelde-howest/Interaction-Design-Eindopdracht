@@ -50,6 +50,11 @@ html {
 /*---------------------------------------/*
  # ELEMENTS
 /*---------------------------------------*/
+body.dialog-open {
+  height: 100vh;
+  overflow-y: hidden;
+}
+
 img,
 svg {
   display: block;
@@ -57,9 +62,8 @@ svg {
   height: auto;
 }
 
-button:focus {
-  outline: solid 8px var(--green);
-  outline-offset: -8px;
+button {
+  cursor: pointer;
 }
 
 /*---------------------------------------/*
@@ -164,6 +168,11 @@ button:focus {
   display: inline-block;
 }
 
+.grid-artist:focus {
+  outline: solid 8px var(--green);
+  outline-offset: -8px;
+}
+
 .grid-artist::after {
   content: '';
   position: absolute;
@@ -179,7 +188,6 @@ button:focus {
 .grid-artist:hover::after {
   content: attr(data-name);
   opacity: 1;
-  cursor: pointer;
   display: grid;
   align-content: center;
   font-size: 1.5rem;
@@ -204,6 +212,22 @@ button:focus {
 .grid-artist img {
   aspect-ratio: 1/1;
   object-fit: cover;
+}
+
+.modal {
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--black);
+  color: white;
+  border: none;
+}
+
+.modal-close {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
 }
 
 /*---------------------------------------/*
