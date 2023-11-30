@@ -296,6 +296,61 @@ button {
   font-size: 2rem;
 }
 
+.toggle {
+  display: grid;
+  place-items: center;
+}
+
+.icon {
+  grid-area: 1 / 1;
+  transition: opacity .3s ease;
+  cursor: pointer;
+}
+
+.icon--play {
+  opacity: 100;
+}
+
+.icon--stop {
+  opacity: 0;
+}
+
+.added .icon--play {
+  opacity: 0;
+}
+
+.added .icon--stop {
+  opacity: 100;
+}
+
+.animate {
+  animation: growProgressBar 30s linear;
+}
+
+.icon--progressbar {
+  --size: 2.4375rem;
+  --pgPercentage: 0;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #121212 80%, transparent 0 99.9%, #121212 0), conic-gradient(#1db954 calc(var(--pgPercentage) * 1%), #3f3f3f 0);
+}
+
+@property --pgPercentage {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes growProgressBar {
+  0% {
+    --pgPercentage: 0;
+  }
+  100% {
+    --pgPercentage: 100;
+  }
+}
+
 .artist-statistics-title {
   font-family: 'Geist-Bold';
   font-size: 3rem;

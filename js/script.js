@@ -79,7 +79,29 @@ const showModal = (data, img_urls, id, nr, name) => {
   document.querySelector('.artist-nr').innerHTML = nr;
   document.querySelector('.artist-song-img').innerHTML = `<img src="${data[nr - 1].track.album.images[0].url}" alt="Album cover for song: ${data[nr - 1].track.name}">`;
   document.querySelector('.artist-song-name').innerHTML = data[nr - 1].track.name;
-  document.querySelector('.artist-song-preview').innerHTML = `<audio controls><source src="${data[nr - 1].track.preview_url}" type="audio/mpeg">Your browser does not support the audio element.</audio>`;
+  listenToPlayMusic(data[nr - 1].track.preview_url);
+};
+
+const listenToPlayMusic = (preview_url) => {
+  const toggle = document.querySelector('.js-toggle');
+  const icon = document.querySelector('.icon--progressbar');
+  var music = new Audio(preview_url);
+  toggle.addEventListener('click', function () {
+    toggle.classList.toggle('added');
+    icon.classList.toggle('animate');
+    if (icon.classList.contains('animate')) {
+      document.querySelector('.animate').addEventListener('animationend', function () {
+        toggle.classList.remove('added');
+        icon.classList.remove('animate');
+      });
+    }
+    if (toggle.classList.contains('added')) {
+      music.play();
+    } else {
+      music.pause();
+      music.currentTime = 0;
+    }
+  });
 };
 
 const getGridData = async () => {
