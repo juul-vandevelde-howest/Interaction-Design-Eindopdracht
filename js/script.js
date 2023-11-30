@@ -25,7 +25,6 @@ const listenToClickGrid = function (data, img_urls) {
   closeBtn.addEventListener('click', function () {
     const current_nr = document.querySelector('.artist-nr').innerHTML;
     document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
-    document.activeElement.blur();
     dialog.close();
     body.classList.remove('dialog-open');
   });
@@ -85,7 +84,7 @@ const showModal = (data, img_urls, id, nr, name) => {
 const listenToPlayMusic = (preview_url) => {
   const toggle = document.querySelector('.js-toggle');
   const icon = document.querySelector('.icon--progressbar');
-  var music = new Audio(preview_url);
+  const music = new Audio(preview_url);
   toggle.addEventListener('click', function () {
     toggle.classList.toggle('added');
     icon.classList.toggle('animate');
