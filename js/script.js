@@ -8,6 +8,7 @@ const authOptions = {
   },
   data: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
 };
+let currentlyPlaying;
 
 const listenToClickGrid = function (data, img_urls) {
   const body = document.querySelector('body');
@@ -17,12 +18,14 @@ const listenToClickGrid = function (data, img_urls) {
   const prevBtn = document.querySelector('.prev-btn');
 
   dialog.addEventListener('cancel', function () {
+    stopMusic();
     const current_nr = document.querySelector('.artist-nr').innerHTML;
     document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
     body.classList.remove('dialog-open');
   });
 
   closeBtn.addEventListener('click', function () {
+    stopMusic();
     const current_nr = document.querySelector('.artist-nr').innerHTML;
     document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
     dialog.close();
@@ -30,6 +33,7 @@ const listenToClickGrid = function (data, img_urls) {
   });
 
   nextBtn.addEventListener('click', function () {
+    stopMusic();
     const current_nr = document.querySelector('.artist-nr').innerHTML;
     let next_nr = parseInt(current_nr) + 1;
     if (next_nr > 50) {
@@ -41,6 +45,7 @@ const listenToClickGrid = function (data, img_urls) {
   });
 
   prevBtn.addEventListener('click', function () {
+    stopMusic();
     const current_nr = document.querySelector('.artist-nr').innerHTML;
     let prev_nr = parseInt(current_nr) - 1;
     if (prev_nr < 1) {
@@ -78,13 +83,24 @@ const showModal = (data, img_urls, id, nr, name) => {
   document.querySelector('.artist-nr').innerHTML = nr;
   document.querySelector('.artist-song-img').innerHTML = `<img src="${data[nr - 1].track.album.images[0].url}" alt="Album cover for song: ${data[nr - 1].track.name}">`;
   document.querySelector('.artist-song-name').innerHTML = data[nr - 1].track.name;
-  listenToPlayMusic(data[nr - 1].track.preview_url);
+  document.querySelector('.artist-song-preview').innerHTML = `
+  <button title="Play/Stop Preview" aria-label="auto" aria-live="polite" class="o-button-reset toggle js-toggle">
+    <svg class="icon icon--play" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#1db954" viewBox="0 0 256 256">
+        <path d="M128,24A104,104,0,1,0,232,128,104.13,104.13,0,0,0,128,24Zm36.44,110.66-48,32A8.05,8.05,0,0,1,112,168a8,8,0,0,1-8-8V96a8,8,0,0,1,12.44-6.66l48,32a8,8,0,0,1,0,13.32Z"></path>
+    </svg>
+    <div class="icon icon--stop icon--progressbar"></div>
+    <svg class="icon icon--stop" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#1db954" viewBox="0 0 256 256">
+        <path d="M128,212Zm32-104v40a12,12,0,0,1-12,12H108a12,12,0,0,1-12-12V108a12,12,0,0,1,12-12h40A12,12,0,0,1,160,108Z"></path>
+    </svg>
+</button>`;
+  playMusic(data[nr - 1].track.preview_url);
 };
 
-const listenToPlayMusic = (preview_url) => {
+const playMusic = (preview_url) => {
   const toggle = document.querySelector('.js-toggle');
   const icon = document.querySelector('.icon--progressbar');
   const music = new Audio(preview_url);
+  currentlyPlaying = music;
   toggle.addEventListener('click', function () {
     toggle.classList.toggle('added');
     icon.classList.toggle('animate');
@@ -101,6 +117,11 @@ const listenToPlayMusic = (preview_url) => {
       music.currentTime = 0;
     }
   });
+};
+
+const stopMusic = () => {
+  currentlyPlaying.pause();
+  currentlyPlaying.currentTime = 0; 
 };
 
 const getGridData = async () => {
