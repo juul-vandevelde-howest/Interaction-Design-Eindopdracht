@@ -299,12 +299,17 @@ button {
 .toggle {
   display: grid;
   place-items: center;
+  cursor: pointer;
+}
+
+.toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .icon {
   grid-area: 1 / 1;
   transition: opacity .3s ease;
-  cursor: pointer;
 }
 
 .icon--play {

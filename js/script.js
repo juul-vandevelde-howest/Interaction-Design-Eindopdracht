@@ -100,6 +100,12 @@ const playMusic = (preview_url) => {
   const toggle = document.querySelector('.js-toggle');
   const icon = document.querySelector('.icon--progressbar');
   const music = new Audio(preview_url);
+  if (preview_url === null) {
+    toggle.classList.add('disabled');
+    toggle.setAttribute('disabled', true);
+    toggle.setAttribute('aria-disabled', true);
+    toggle.setAttribute('aria-label', 'No preview available');
+  }
   currentlyPlaying = music;
   toggle.addEventListener('click', function () {
     toggle.classList.toggle('added');
