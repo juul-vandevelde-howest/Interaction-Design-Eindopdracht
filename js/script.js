@@ -9,6 +9,7 @@ const authOptions = {
   data: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
 };
 let currentlyPlaying;
+let firstOpenedNr;
 
 const listenToClickGrid = function (data, img_urls) {
   const body = document.querySelector('body');
@@ -19,15 +20,23 @@ const listenToClickGrid = function (data, img_urls) {
 
   dialog.addEventListener('cancel', function () {
     stopMusic();
+    document.querySelector('.artist-followers-fill').style.width = '0%';
+    document.querySelector('.artist-popularity-fill').style.width = '0%';
     const current_nr = document.querySelector('.artist-nr').innerHTML;
-    document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
+    if (firstOpenedNr !== current_nr) {
+      document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
+    }
     body.classList.remove('dialog-open');
   });
 
   closeBtn.addEventListener('click', function () {
     stopMusic();
+    document.querySelector('.artist-followers-fill').style.width = '0%';
+    document.querySelector('.artist-popularity-fill').style.width = '0%';
     const current_nr = document.querySelector('.artist-nr').innerHTML;
-    document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
+    if (firstOpenedNr !== current_nr) {
+      document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
+    }
     dialog.close();
     body.classList.remove('dialog-open');
   });
@@ -62,6 +71,7 @@ const listenToClickGrid = function (data, img_urls) {
       const id = this.dataset.id;
       const nr = this.dataset.nr;
       const name = this.dataset.name;
+      firstOpenedNr = nr;
       showModal(data, img_urls, id, nr, name);
       dialog.showModal();
       body.classList.add('dialog-open');
@@ -127,7 +137,7 @@ const playMusic = (preview_url) => {
 
 const stopMusic = () => {
   currentlyPlaying.pause();
-  currentlyPlaying.currentTime = 0; 
+  currentlyPlaying.currentTime = 0;
 };
 
 const getGridData = async () => {
@@ -145,6 +155,10 @@ const getGridData = async () => {
       img_urls.push(data.images[0].url);
     }
     showGrid(data.tracks.items, img_urls);
+    setTimeout(function() {
+      document.querySelector('.loader').classList.add('u-hidden');
+      document.querySelector('.js-container').classList.remove('u-hidden');
+    }, 1000);
   } catch (error) {
     console.error('Error:', error);
     localStorage.removeItem('access_token');

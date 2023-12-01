@@ -123,22 +123,23 @@ button {
 /*---------------------------------------/*
  # COMPONENTS
 /*---------------------------------------*/
-.fold {
+.loader {
   display: grid;
   place-items: center;
   justify-items: center;
 }
 
-.fold-img {
+.loader-img {
   width: 100%;
-  max-height: 100vh;
+  height: 100vh;
   object-fit: cover;
   object-position: center;
   opacity: 0.3;
   position: relative;
   grid-area: 1 / 1;
 }
-.fold-title {
+
+.loader-title {
   grid-area: 1 / 1;
   font-size: 4rem;
   text-align: center;
@@ -163,7 +164,7 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 280px) {
+  @media (max-width: 330px) {
     grid-template-columns: repeat(1, 1fr);
   }
 }
@@ -282,7 +283,7 @@ button {
 
 .artist-song {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr 1fr;
   gap: 2rem;
   align-items: center;
 }
@@ -385,14 +386,15 @@ button {
   background-color: var(--green);
   width: 0;
   position: absolute;
+  transition: width .3s cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
 .artist-followers-fill {
-  width: 50%;
+  width: 0%;
 }
 
 .artist-popularity-fill {
-  width: 80%;
+  width: 0%;
 }
 
 .artist-followers {
@@ -402,3 +404,6 @@ button {
 /*---------------------------------------/*
  # UTILITIES
 /*---------------------------------------*/
+.u-hidden {
+  display: none;
+}
