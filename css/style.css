@@ -134,6 +134,9 @@ button {
   display: grid;
   place-items: center;
   justify-items: center;
+  @media (max-width: 576px) {
+    position: fixed;
+  }
 }
 
 .loader-img {
@@ -153,6 +156,10 @@ button {
   max-width: 40rem;
   font-family: 'Geist-UltraBlack';
   z-index: 1;
+  @media (max-width: 1000px) {
+    font-size: 2rem;
+    max-width: 80vw;
+  }
 }
 
 .grid {
@@ -167,7 +174,7 @@ button {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 576px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
