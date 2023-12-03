@@ -65,6 +65,8 @@ svg {
 img {
   aspect-ratio: 1/1;
   object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 button {
@@ -179,6 +181,11 @@ button {
   outline-offset: -8px;
 }
 
+:focus:not(:focus-visible) {
+  outline: 0;
+  box-shadow: none;
+}
+
 .grid-artist::after {
   content: '';
   position: absolute;
@@ -283,7 +290,7 @@ button {
 
 .artist-song {
   display: grid;
-  grid-template-columns: auto 1fr 1fr;
+  grid-template-columns: auto auto 1fr;
   gap: 2rem;
   align-items: center;
 }

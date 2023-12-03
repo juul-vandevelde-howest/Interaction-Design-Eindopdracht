@@ -81,7 +81,11 @@ const listenToClickGrid = function (data, img_urls) {
 
 const showModal = (data, img_urls, id, nr, name) => {
   getArtist(id).then((artist_data) => {
-    document.querySelector('.artist-genres').innerHTML = artist_data.genres.join(', ');
+    if (artist_data.genres.length === 0) {
+      document.querySelector('.artist-genres').innerHTML = 'No genres available';
+    } else {
+      document.querySelector('.artist-genres').innerHTML = artist_data.genres.join(', ');
+    }
     document.querySelector('.artist-followers-data').innerHTML = artist_data.followers.total.toLocaleString();
     document.querySelector('.artist-followers-fill').style.width = (artist_data.followers.total / 115663373) * 100 + '%';
     document.querySelector('.artist-popularity-data').innerHTML = artist_data.popularity + '%';
@@ -155,7 +159,7 @@ const getGridData = async () => {
       img_urls.push(data.images[0].url);
     }
     showGrid(data.tracks.items, img_urls);
-    setTimeout(function() {
+    setTimeout(function () {
       document.querySelector('.loader').classList.add('u-hidden');
       document.querySelector('.js-container').classList.remove('u-hidden');
     }, 1000);
