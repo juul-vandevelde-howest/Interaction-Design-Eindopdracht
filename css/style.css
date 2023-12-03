@@ -53,6 +53,11 @@ html {
 body.dialog-open {
   height: 100vh;
   overflow-y: hidden;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
 }
 
 img,
@@ -162,7 +167,7 @@ button {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (max-width: 576px) {
+  @media (max-width: 1000px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -231,46 +236,76 @@ button {
   background-color: var(--black);
   color: white;
   border: none;
+  @media (max-width: 1000px) {
+    padding: 2rem;
+  }
+}
+
+.modal-body {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1600px;
 }
 
 .close-btn {
   position: absolute;
-  top: 4rem;
-  right: 4rem;
+  top: 0;
+  right: 0;
 }
 
 .change-artist-btns {
-  position: absolute;
   display: flex;
   gap: 2rem;
-  bottom: 4rem;
-  right: 4rem;
+  position: absolute;
+  bottom: -3rem;
+  right: 0;
 }
 
 .artist {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 2rem;
   height: 100%;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: auto 1fr;
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
 .artist-img-nr {
   display: grid;
   align-content: space-between;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr auto;
+    align-items: last baseline;
+  }
 }
 
 .artist-img {
-  max-width: 28rem;
+  max-width: 25vw;
+  @media (max-width: 1000px) {
+    max-width: 60vw;
+  }
 }
 
 .artist-nr {
   font-family: 'Geist-UltraBlack';
   font-size: 14rem;
   line-height: 0.8;
+
+  @media (max-width: 1000px) {
+    text-align: right;
+    font-size: 8rem;
+  }
 }
 
 .artist-nr-info {
   font-size: 2rem;
+  @media (max-width: 1000px) {
+    text-align: right;
+    font-size: 1rem;
+  }
 }
 
 .artist-info {
@@ -281,11 +316,17 @@ button {
 .artist-name {
   font-family: 'Geist-Bold';
   font-size: 4rem;
+  @media (max-width: 1000px) {
+    font-size: 2rem;
+  }
 }
 
 .artist-genres {
   font-size: 2rem;
   text-transform: uppercase;
+  @media (max-width: 1000px) {
+    font-size: 1rem;
+  }
 }
 
 .artist-song {
@@ -293,15 +334,25 @@ button {
   grid-template-columns: auto auto 1fr;
   gap: 2rem;
   align-items: center;
+
+  @media (max-width: 1000px) {
+    gap: 1rem;
+  }
 }
 
 .artist-song-img {
   max-width: 10rem;
+  @media (max-width: 1000px) {
+    max-width: 5rem;
+  }
 }
 
 .artist-song-name {
   font-family: 'Geist-Bold';
   font-size: 2rem;
+  @media (max-width: 1000px) {
+    font-size: 1rem;
+  }
 }
 
 .toggle {
@@ -317,7 +368,7 @@ button {
 
 .icon {
   grid-area: 1 / 1;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .icon--play {
@@ -367,6 +418,9 @@ button {
 .artist-statistics-title {
   font-family: 'Geist-Bold';
   font-size: 3rem;
+  @media (max-width: 1000px) {
+    font-size: 1.5rem;
+  }
 }
 
 .artist-followers,
@@ -376,6 +430,9 @@ button {
   grid-template-columns: auto auto;
   justify-content: space-between;
   font-size: 2rem;
+  @media (max-width: 1000px) {
+    font-size: 1rem;
+  }
 }
 
 .artist-followers-bar,
@@ -385,15 +442,20 @@ button {
   width: 100%;
   position: relative;
   grid-column: span 2;
-  margin-top: .25rem;
+  margin-top: 0.25rem;
+  @media (max-width: 1000px) {
+    height: 0.5rem;
+    margin-top: 0.125rem;
+  }
 }
 
-.artist-followers-fill, .artist-popularity-fill {
+.artist-followers-fill,
+.artist-popularity-fill {
   height: 100%;
   background-color: var(--green);
   width: 0;
   position: absolute;
-  transition: width .3s cubic-bezier(0.47, 0, 0.745, 0.715);
+  transition: width 0.3s cubic-bezier(0.47, 0, 0.745, 0.715);
 }
 
 .artist-followers-fill {
@@ -406,6 +468,9 @@ button {
 
 .artist-followers {
   margin: 2rem 0;
+  @media (max-width: 1000px) {
+    margin: 1rem 0;
+  }
 }
 
 /*---------------------------------------/*
