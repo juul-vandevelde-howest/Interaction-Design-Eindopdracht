@@ -33,6 +33,10 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--black);
+  @media (min-width: 1024px) {
+     font-size: 80%;
+  }
+  
 }
 
 *,
@@ -156,7 +160,7 @@ button {
   max-width: 40rem;
   font-family: 'Geist-UltraBlack';
   z-index: 1;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     font-size: 2rem;
     max-width: 80vw;
   }
@@ -243,8 +247,11 @@ button {
   background-color: var(--black);
   color: white;
   border: none;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     padding: 2rem;
+  }
+  @media (max-width: 370px) {
+    padding: 1rem;
   }
 }
 
@@ -252,6 +259,9 @@ button {
   position: relative;
   margin: 0 auto;
   max-width: 1600px;
+  @media (min-width: 1024px) {
+    height: 100%;
+  }
 }
 
 .close-btn {
@@ -264,7 +274,7 @@ button {
   display: flex;
   gap: 2rem;
   position: absolute;
-  bottom: -3rem;
+  bottom: 0;
   right: 0;
 }
 
@@ -273,7 +283,7 @@ button {
   display: grid;
   gap: 2rem;
   grid-template-columns: auto 1fr;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
@@ -283,7 +293,7 @@ button {
   display: grid;
   align-content: space-between;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     grid-template-columns: 1fr auto;
     align-items: last baseline;
   }
@@ -291,7 +301,7 @@ button {
 
 .artist-img {
   max-width: 25vw;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     max-width: 60vw;
   }
 }
@@ -301,17 +311,33 @@ button {
   font-size: 14rem;
   line-height: 0.8;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     text-align: right;
-    font-size: 8rem;
+    font-size: 12rem;
+  }
+
+  @media (max-width: 700px) {
+    font-size: 7rem;
+  }
+
+  @media (max-width: 370px) {
+    font-size: 4.5rem;
   }
 }
 
 .artist-nr-info {
   font-size: 2rem;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     text-align: right;
+    font-size: 1.5rem;
+  }
+  
+  @media (max-width: 700px) {
     font-size: 1rem;
+  }
+
+  @media (max-width: 370px) {
+    font-size: 0.7rem;
   }
 }
 
@@ -323,42 +349,67 @@ button {
 .artist-name {
   font-family: 'Geist-Bold';
   font-size: 4rem;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
+    font-size: 3rem;
+  }
+  @media (max-width: 700px) {
     font-size: 2rem;
+  }
+  @media (max-width: 370px) {
+    font-size: 1.5rem;
   }
 }
 
 .artist-genres {
   font-size: 2rem;
   text-transform: uppercase;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
+    font-size: 1.5rem;
+  }
+  @media (max-width: 700px) {
     font-size: 1rem;
+  }
+  @media (max-width: 370px) {
+    font-size: 0.75rem;
   }
 }
 
 .artist-song {
+  padding: 3rem 0;
   display: grid;
   grid-template-columns: auto auto 1fr;
   gap: 2rem;
   align-items: center;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     gap: 1rem;
+  }
+
+  @media (max-width: 370px) {
+    padding: 2.5rem 0;
   }
 }
 
 .artist-song-img {
   max-width: 10rem;
-  @media (max-width: 1000px) {
-    max-width: 5rem;
+  @media (max-width: 1024px) {
+    max-width: 30vw;
   }
 }
 
 .artist-song-name {
   font-family: 'Geist-Bold';
   font-size: 2rem;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 700px) {
     font-size: 1rem;
+  }
+
+  @media (max-width: 370px) {
+    font-size: 0.75rem;
   }
 }
 
@@ -399,7 +450,7 @@ button {
 }
 
 .icon--progressbar {
-  --size: 2.4375rem;
+  --size: 39px;
   --pgPercentage: 0;
   width: var(--size);
   height: var(--size);
@@ -425,8 +476,14 @@ button {
 .artist-statistics-title {
   font-family: 'Geist-Bold';
   font-size: 3rem;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
+    font-size: 2rem;
+  }
+  @media (max-width: 700px) {
     font-size: 1.5rem;
+  }
+  @media (max-width: 370px) {
+    font-size: 1rem;
   }
 }
 
@@ -437,8 +494,14 @@ button {
   grid-template-columns: auto auto;
   justify-content: space-between;
   font-size: 2rem;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
+    font-size: 1.5rem;
+  }
+  @media (max-width: 700px) {
     font-size: 1rem;
+  }
+  @media (max-width: 370px) {
+    font-size: 0.75rem;
   }
 }
 
@@ -450,7 +513,7 @@ button {
   position: relative;
   grid-column: span 2;
   margin-top: 0.25rem;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     height: 0.5rem;
     margin-top: 0.125rem;
   }
@@ -475,7 +538,7 @@ button {
 
 .artist-followers {
   margin: 2rem 0;
-  @media (max-width: 1000px) {
+  @media (max-width: 1024px) {
     margin: 1rem 0;
   }
 }
