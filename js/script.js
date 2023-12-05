@@ -23,6 +23,12 @@ const listenToClickGrid = function (data, img_urls) {
     document.querySelector('.artist-followers-fill').style.width = '0%';
     document.querySelector('.artist-popularity-fill').style.width = '0%';
     const current_nr = document.querySelector('.artist-nr').innerHTML;
+    let element = document.querySelector('body.dialog-open');
+    element.style.position = '';
+    element.style.bottom = '';
+    element.style.left = '';
+    element.style.right = '';
+    element.style.top = '';
     if (firstOpenedNr !== current_nr) {
       document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
     }
@@ -34,6 +40,12 @@ const listenToClickGrid = function (data, img_urls) {
     document.querySelector('.artist-followers-fill').style.width = '0%';
     document.querySelector('.artist-popularity-fill').style.width = '0%';
     const current_nr = document.querySelector('.artist-nr').innerHTML;
+    let element = document.querySelector('body.dialog-open');
+    element.style.position = '';
+    element.style.bottom = '';
+    element.style.left = '';
+    element.style.right = '';
+    element.style.top = '';
     if (firstOpenedNr !== current_nr) {
       document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
     }
@@ -75,6 +87,12 @@ const listenToClickGrid = function (data, img_urls) {
       showModal(data, img_urls, id, nr, name);
       dialog.showModal();
       body.classList.add('dialog-open');
+      let element = document.querySelector('body.dialog-open');
+      element.style.position = 'fixed';
+      element.style.bottom = '0';
+      element.style.left = '0';
+      element.style.right = '0';
+      element.style.top = '0';
     });
   }
 };

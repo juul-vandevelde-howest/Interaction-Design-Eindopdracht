@@ -32,9 +32,9 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--black);
-  @media (min-width: 1024px) {
+  /* @media (min-width: 1024px) {
     font-size: 80%;
-  }
+  } */
 }
 
 *,
@@ -55,11 +55,6 @@ html {
 body.dialog-open {
   height: 100vh;
   overflow-y: hidden;
-  bottom: 0;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
 }
 
 img,
@@ -409,7 +404,7 @@ button {
 
   @media (max-width: 1024px) {
     gap: 1rem;
-    padding: 1.5rem 0;
+    padding: 2rem 0;
   }
 
   @media (max-width: 370px) {
@@ -418,6 +413,7 @@ button {
 }
 
 .artist-song-img {
+  /* min-width: 6.75rem; */
   max-width: 10rem;
   @media (max-width: 1024px) {
     max-width: 30vw;
