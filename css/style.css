@@ -190,30 +190,55 @@ button {
 .grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  .grid-bonus {
+    display: none;
+  }
 
   @media (max-width: 1400px) {
     grid-template-columns: repeat(4, 1fr);
+    .grid-bonus {
+      display: inline-block;
+      grid-column: span 2;
+      .bonus-img {
+        aspect-ratio: 2/1;
+      }
+    }
   }
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
+    .grid-bonus {
+      display: inline-block;
+      grid-column: span 1;
+      .bonus-img {
+        aspect-ratio: 1/1;
+      }
+    }
   }
 
   @media (max-width: 576px) {
     grid-template-columns: repeat(2, 1fr);
+    .grid-bonus {
+      display: none;
+    }
   }
 
   @media (max-width: 330px) {
     grid-template-columns: repeat(1, 1fr);
+    .grid-bonus {
+      display: none;
+    }
   }
 }
 
-.grid-artist {
+.grid-artist,
+.grid-bonus {
   position: relative;
   display: inline-block;
 }
 
-.grid-artist:focus {
+.grid-artist:focus,
+.grid-bonus:focus {
   outline: solid 8px var(--green);
   outline-offset: -8px;
 }
@@ -223,7 +248,8 @@ button {
   box-shadow: none;
 }
 
-.grid-artist::after {
+.grid-artist::after,
+.grid-bonus::after {
   content: '';
   position: absolute;
   top: 0;
@@ -235,7 +261,8 @@ button {
   transition: opacity 0.3s ease;
 }
 
-.grid-artist:hover::after {
+.grid-artist:hover::after,
+.grid-bonus:hover::after {
   content: attr(data-name);
   opacity: 1;
   display: grid;
@@ -244,7 +271,8 @@ button {
   font-family: 'Geist-UltraBlack';
 }
 
-.grid-artist::before {
+.grid-artist::before,
+.grid-bonus::before {
   content: attr(data-nr);
   position: absolute;
   bottom: 0;
@@ -257,6 +285,15 @@ button {
   height: 3.5rem;
   display: grid;
   align-content: center;
+}
+
+.bonus {
+  height: 100%;
+  width: 100%;
+  padding: 0 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal {

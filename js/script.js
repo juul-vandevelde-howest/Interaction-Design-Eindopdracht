@@ -9,7 +9,6 @@ const authOptions = {
   data: `grant_type=client_credentials&client_id=${clientId}&client_secret=${clientSecret}`,
 };
 let currentlyPlaying;
-let firstOpenedNr;
 
 const listenToClickGrid = function (data, img_urls) {
   const body = document.querySelector('body');
@@ -29,27 +28,32 @@ const listenToClickGrid = function (data, img_urls) {
     element.style.left = '';
     element.style.right = '';
     element.style.top = '';
-    if (firstOpenedNr !== current_nr) {
-      document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
-    }
+    document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
     body.classList.remove('dialog-open');
   });
 
   closeBtn.addEventListener('click', function () {
-    stopMusic();
+    if (body.classList.contains('rick-rolled')) {
+      stopMusic();
+    }
     document.querySelector('.artist-followers-fill').style.width = '0%';
     document.querySelector('.artist-popularity-fill').style.width = '0%';
-    const current_nr = document.querySelector('.artist-nr').innerHTML;
     let element = document.querySelector('body.dialog-open');
     element.style.position = '';
     element.style.bottom = '';
     element.style.left = '';
     element.style.right = '';
     element.style.top = '';
-    if (firstOpenedNr !== current_nr) {
+    if (body.classList.contains('rick-rolled')) {
+      console.info('rick rolled');
+      document.querySelector(`[data-nr="?"]`).scrollIntoView();
+    } else {
+      console.info('rick rolledé');
+      const current_nr = document.querySelector('.artist-nr').innerHTML;
       document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
     }
     dialog.close();
+    body.classList.remove('rick-rolled');
     body.classList.remove('dialog-open');
   });
 
@@ -83,7 +87,6 @@ const listenToClickGrid = function (data, img_urls) {
       const id = this.dataset.id;
       const nr = this.dataset.nr;
       const name = this.dataset.name;
-      firstOpenedNr = nr;
       showModal(data, img_urls, id, nr, name);
       dialog.showModal();
       body.classList.add('dialog-open');
@@ -187,6 +190,47 @@ const getGridData = async () => {
   }
 };
 
+const listenToBonus = () => {
+  const bonus = document.querySelector('.grid-bonus');
+  bonus.addEventListener('click', function () {
+    showModalBonus();
+  });
+};
+
+const showModalBonus = () => {
+  const bonusDialog = document.querySelector('.modal');
+  const video = document.querySelector('.bonus');
+  const body = document.querySelector('body');
+  const artist = document.querySelector('.artist');
+  const changeArtistBtns = document.querySelector('.change-artist-btns');
+  bonusDialog.showModal();
+  body.classList.add('dialog-open');
+  document.querySelector('.bonus').classList.remove('u-hidden');
+  artist.classList.add('u-hidden');
+  document.querySelector('.change-artist-btns').classList.add('u-hidden');
+  video.play();
+  document.querySelector('.close-btn').addEventListener('click', function () {
+    bonusDialog.close();
+    video.currentTime = 0;
+    video.pause();
+    artist.classList.remove('u-hidden');
+    document.querySelector('.bonus').classList.add('u-hidden');
+    document.querySelector('.change-artist-btns').classList.remove('u-hidden');
+    body.classList.remove('dialog-open');
+    body.classList.add('rick-rolled');
+  });
+  bonusDialog.addEventListener('cancel', function () {
+    bonusDialog.close();
+    video.currentTime = 0;
+    video.pause();
+    artist.classList.remove('u-hidden');
+    document.querySelector('.bonus').classList.add('u-hidden');
+    document.querySelector('.change-artist-btns').classList.remove('u-hidden');
+    body.classList.remove('dialog-open');
+    body.classList.add('rick-rolled');
+  });
+};
+
 const showGrid = (data, img_urls) => {
   let html = '';
   let i = 0;
@@ -197,8 +241,12 @@ const showGrid = (data, img_urls) => {
             <img src="${url}" alt="${data[i - 1].track.artists[0].name}">
         </button>`;
   });
+  html += `<button class="grid-bonus o-button-reset" data-nr="?" data-name="Bonus Artist"">
+  <img class="bonus-img" src="./img/the-halal-design-studio-HK06CdtW2rg-unsplash.jpg" alt="Bonus Artist">
+</button>`;
   document.querySelector('.js-container').innerHTML = html;
   listenToClickGrid(data, img_urls);
+  listenToBonus();
 };
 
 const getArtist = async (id) => {
