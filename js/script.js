@@ -18,7 +18,7 @@ const listenToClickGrid = function (data, img_urls) {
   const prevBtn = document.querySelector('.prev-btn');
 
   dialog.addEventListener('cancel', function () {
-    stopMusic();
+    stopMedia();
     document.querySelector('.artist-followers-fill').style.width = '0%';
     document.querySelector('.artist-popularity-fill').style.width = '0%';
     const current_nr = document.querySelector('.artist-nr').innerHTML;
@@ -30,35 +30,27 @@ const listenToClickGrid = function (data, img_urls) {
     element.style.top = '';
     document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
     body.classList.remove('dialog-open');
+    dialog.close();
   });
 
   closeBtn.addEventListener('click', function () {
-    if (body.classList.contains('rick-rolled')) {
-      stopMusic();
-    }
+    stopMedia();
     document.querySelector('.artist-followers-fill').style.width = '0%';
     document.querySelector('.artist-popularity-fill').style.width = '0%';
+    const current_nr = document.querySelector('.artist-nr').innerHTML;
     let element = document.querySelector('body.dialog-open');
     element.style.position = '';
     element.style.bottom = '';
     element.style.left = '';
     element.style.right = '';
     element.style.top = '';
-    if (body.classList.contains('rick-rolled')) {
-      console.info('rick rolled');
-      document.querySelector(`[data-nr="?"]`).scrollIntoView();
-    } else {
-      console.info('rick rolledé');
-      const current_nr = document.querySelector('.artist-nr').innerHTML;
-      document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
-    }
-    dialog.close();
-    body.classList.remove('rick-rolled');
+    document.querySelector(`[data-nr="${current_nr}"]`).scrollIntoView();
     body.classList.remove('dialog-open');
+    dialog.close();
   });
 
   nextBtn.addEventListener('click', function () {
-    stopMusic();
+    stopMedia();
     const current_nr = document.querySelector('.artist-nr').innerHTML;
     let next_nr = parseInt(current_nr) + 1;
     if (next_nr > 50) {
@@ -70,7 +62,7 @@ const listenToClickGrid = function (data, img_urls) {
   });
 
   prevBtn.addEventListener('click', function () {
-    stopMusic();
+    stopMedia();
     const current_nr = document.querySelector('.artist-nr').innerHTML;
     let prev_nr = parseInt(current_nr) - 1;
     if (prev_nr < 1) {
@@ -160,7 +152,7 @@ const playMusic = (preview_url) => {
   });
 };
 
-const stopMusic = () => {
+const stopMedia = () => {
   currentlyPlaying.pause();
   currentlyPlaying.currentTime = 0;
 };
@@ -194,6 +186,13 @@ const listenToBonus = () => {
   const bonus = document.querySelector('.grid-bonus');
   bonus.addEventListener('click', function () {
     showModalBonus();
+    document.querySelector('body').classList.add('dialog-open');
+    let element = document.querySelector('body.dialog-open');
+    element.style.position = 'fixed';
+    element.style.bottom = '0';
+    element.style.left = '0';
+    element.style.right = '0';
+    element.style.top = '0';
   });
 };
 
@@ -204,30 +203,27 @@ const showModalBonus = () => {
   const artist = document.querySelector('.artist');
   const changeArtistBtns = document.querySelector('.change-artist-btns');
   bonusDialog.showModal();
-  body.classList.add('dialog-open');
-  document.querySelector('.bonus').classList.remove('u-hidden');
+  document.querySelector('.artist-nr').innerHTML = '?';
+  video.classList.remove('u-hidden');
   artist.classList.add('u-hidden');
-  document.querySelector('.change-artist-btns').classList.add('u-hidden');
+  changeArtistBtns.classList.add('u-hidden');
   video.play();
+  currentlyPlaying = video;
   document.querySelector('.close-btn').addEventListener('click', function () {
     bonusDialog.close();
-    video.currentTime = 0;
-    video.pause();
+    stopMedia();
     artist.classList.remove('u-hidden');
-    document.querySelector('.bonus').classList.add('u-hidden');
-    document.querySelector('.change-artist-btns').classList.remove('u-hidden');
+    video.classList.add('u-hidden');
+    changeArtistBtns.classList.remove('u-hidden');
     body.classList.remove('dialog-open');
-    body.classList.add('rick-rolled');
   });
   bonusDialog.addEventListener('cancel', function () {
     bonusDialog.close();
-    video.currentTime = 0;
-    video.pause();
+    stopMedia();
     artist.classList.remove('u-hidden');
-    document.querySelector('.bonus').classList.add('u-hidden');
-    document.querySelector('.change-artist-btns').classList.remove('u-hidden');
+    video.classList.add('u-hidden');
+    changeArtistBtns.classList.remove('u-hidden');
     body.classList.remove('dialog-open');
-    body.classList.add('rick-rolled');
   });
 };
 
