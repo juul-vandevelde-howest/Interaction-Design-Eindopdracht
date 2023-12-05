@@ -364,6 +364,11 @@ button {
 
 .artist-img {
   max-width: 25vw;
+
+  @media (max-width: 1400px) {
+    max-width: 40vw;
+  }
+
   @media (max-width: 1024px) {
     max-width: 60vw;
   }
@@ -424,7 +429,7 @@ button {
 }
 
 .artist-genres {
-  font-size: 2rem;
+  font-size: 1.75rem;
   text-transform: uppercase;
   @media (max-width: 1024px) {
     font-size: 1.5rem;
@@ -538,8 +543,11 @@ button {
 }
 
 .artist-statistics-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-family: 'Geist-Bold';
-  font-size: 3rem;
+  font-size: 2.5rem;
   @media (max-width: 1024px) {
     font-size: 2rem;
   }
@@ -551,13 +559,55 @@ button {
   }
 }
 
+.tooltip {
+  font-family: 'Geist-Regular';
+  font-size: 1.5rem;
+  position: relative;
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  @media (max-width: 1024px) {
+    width: 2rem;
+    height: 2rem;
+  }
+  @media (max-width: 700px) {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  @media (max-width: 370px) {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 30rem;
+  background-color: black;
+  color: #fff;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  top: -5px;
+  right: 150%; 
+}
+
+.tooltip:focus .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
 .artist-followers,
 .artist-popularity {
   display: grid;
   position: relative;
   grid-template-columns: auto auto;
   justify-content: space-between;
-  font-size: 2rem;
+  font-size: 1.75rem;
   @media (max-width: 1024px) {
     font-size: 1.5rem;
   }
