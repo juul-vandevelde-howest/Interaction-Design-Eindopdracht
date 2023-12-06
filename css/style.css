@@ -402,6 +402,7 @@ button {
 
 .artist-nr-info {
   font-size: 2rem;
+  white-space: nowrap;
   @media (max-width: 1024px) {
     text-align: right;
     font-size: 1.5rem;
