@@ -1,15 +1,5 @@
 /*---------------------------------------/*
- # VARIABLES
-/*---------------------------------------*/
-:root {
-  --green: #1db954;
-  --black: #121212;
-
-  --preview-icon-size: 2.5rem;
-}
-
-/*---------------------------------------/*
- # GENERIC
+ # FONTS
 /*---------------------------------------*/
 @font-face {
   font-family: 'Geist-Regular';
@@ -26,6 +16,19 @@
   src: url('../fonts/Geist-UltraBlack.woff2') format('woff2');
 }
 
+/*---------------------------------------/*
+ # VARIABLES
+/*---------------------------------------*/
+:root {
+  --green: #1db954;
+  --black: #121212;
+
+  --preview-icon-size: 2.5rem;
+}
+
+/*---------------------------------------/*
+ # GENERIC
+/*---------------------------------------*/
 html {
   font-family: 'Geist-Regular', Helvetica, arial, sans-serif;
   font-size: 1rem;
@@ -40,12 +43,6 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
 }
 
 /*---------------------------------------/*
@@ -174,17 +171,6 @@ button {
 
 .loader-dots span:nth-child(3) {
   animation-delay: 0.6s;
-}
-
-@keyframes dotdotdot {
-  0%,
-  49% {
-    opacity: 0;
-  }
-  50%,
-  100% {
-    opacity: 1;
-  }
 }
 
 .grid {
@@ -495,7 +481,6 @@ button {
 
 .toggle-info {
   opacity: 0.5;
-
 }
 
 .icon {
@@ -532,21 +517,6 @@ button {
   height: var(--size);
   border-radius: 50%;
   background: radial-gradient(closest-side, #121212 80%, transparent 0 99.9%, #121212 0), conic-gradient(#1db954 calc(var(--pgPercentage) * 1%), #3f3f3f 0);
-}
-
-@property --pgPercentage {
-  syntax: '<number>';
-  inherits: false;
-  initial-value: 0;
-}
-
-@keyframes growProgressBar {
-  0% {
-    --pgPercentage: 0;
-  }
-  100% {
-    --pgPercentage: 100;
-  }
 }
 
 .artist-statistics {
@@ -677,9 +647,63 @@ button {
   }
 }
 
+@property --pgPercentage {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@keyframes growProgressBar {
+  0% {
+    --pgPercentage: 0;
+  }
+  100% {
+    --pgPercentage: 100;
+  }
+}
+
+@keyframes dotdotdot {
+  0%,
+  49% {
+    opacity: 0;
+  }
+  50%,
+  100% {
+    opacity: 1;
+  }
+}
+
 /*---------------------------------------/*
  # UTILITIES
 /*---------------------------------------*/
 .u-hidden {
   display: none;
 }
+
+/*------------------------------------*\
+#MEDIA
+\*------------------------------------*/
+
+/*
+    Media Queries
+    -------------
+*/
+
+/* Extra small devices (portrait phones, less than 576px)
+*/
+
+/* Small devices (landscape phones, 576px and up)
+@media (max-width: 576px) {}
+*/
+
+/* Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {}
+*/
+
+/* Large devices (landscape tablets, desktops, 992px and up)
+@media (max-width: 992px) {}
+*/
+
+/* Extra large devices (large desktops, 1200px and up)
+@media (max-width: 1200px) {}
+*/
