@@ -242,7 +242,7 @@ const showGrid = (data, img_urls) => {
 </button>`;
   document.querySelector('.js-container').innerHTML = html;
   listenToClickGrid(data, img_urls);
-  // listenToTooltip();
+  listenToTooltip();
   listenToBonus();
 };
 

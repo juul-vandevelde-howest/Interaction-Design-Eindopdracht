@@ -4,6 +4,8 @@
 :root {
   --green: #1db954;
   --black: #121212;
+
+  --preview-icon-size: 2.5rem;
 }
 
 /*---------------------------------------/*
@@ -32,9 +34,6 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--black);
-  /* @media (min-width: 1024px) {
-    font-size: 80%;
-  } */
 }
 
 *,
@@ -337,9 +336,7 @@ button {
 .change-artist-btns {
   display: flex;
   gap: 2rem;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  margin-top: 2rem;
 }
 
 .artist {
@@ -354,12 +351,13 @@ button {
 }
 
 .artist-img-nr {
-  display: grid;
-  align-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
   @media (max-width: 1024px) {
-    grid-template-columns: 1fr auto;
-    align-items: last baseline;
+    flex-direction: row;
+    align-items: end;
   }
 }
 
@@ -386,10 +384,12 @@ button {
   }
 
   @media (max-width: 700px) {
+    margin-top: 2rem;
     font-size: 7rem;
   }
 
   @media (max-width: 370px) {
+    margin-top: 2rem;
     font-size: 4.5rem;
   }
 }
@@ -406,7 +406,7 @@ button {
   }
 
   @media (max-width: 370px) {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -445,8 +445,7 @@ button {
 
 .artist-song {
   padding: 3rem 0;
-  display: grid;
-  grid-template-columns: auto auto 1fr;
+  display: flex;
   gap: 2rem;
   align-items: center;
 
@@ -494,16 +493,23 @@ button {
   cursor: not-allowed;
 }
 
+.toggle-info {
+  opacity: 0.5;
+
+}
+
 .icon {
   grid-area: 1 / 1;
   transition: opacity 0.3s ease;
 }
 
 .icon--play {
+  width: var(--preview-icon-size);
   opacity: 100;
 }
 
 .icon--stop {
+  width: var(--preview-icon-size);
   opacity: 0;
 }
 
@@ -520,7 +526,7 @@ button {
 }
 
 .icon--progressbar {
-  --size: 39px;
+  --size: calc(var(--preview-icon-size) * 0.8125);
   --pgPercentage: 0;
   width: var(--size);
   height: var(--size);
@@ -541,6 +547,15 @@ button {
   100% {
     --pgPercentage: 100;
   }
+}
+
+.artist-statistics {
+  display: flex;
+  flex-direction: column;
+}
+
+.artist-statistics .change-artist-btns {
+  align-self: flex-end;
 }
 
 .artist-statistics-title {
@@ -598,8 +613,11 @@ button {
   }
 }
 
-.tooltip:focus-visible .tooltiptext,
 .tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.tooltip-btn:focus-visible + .tooltiptext {
   visibility: visible;
 }
 
