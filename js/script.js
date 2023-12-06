@@ -242,19 +242,23 @@ const showGrid = (data, img_urls) => {
 </button>`;
   document.querySelector('.js-container').innerHTML = html;
   listenToClickGrid(data, img_urls);
-  listenToTooltip();
+  // listenToTooltip();
   listenToBonus();
 };
 
 const listenToTooltip = () => {
-  document.body.addEventListener('touchstart', function(e) {
+  document.body.addEventListener('touchstart', function (e) {
+    // get the element that is in focus
     var activeElement = document.activeElement;
-    if (activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA") {
-        if (e.target !== activeElement) {
-            activeElement.blur();
-        }
+    // if the activeElement has the class tooltip
+    if (activeElement.classList.contains('tooltip')) {
+      // if the touch was not on the activeElement
+      if (e.target !== activeElement) {
+        // remove focus from activeElement
+        activeElement.blur();
+      }
     }
-});
+  });
 };
 
 const getArtist = async (id) => {
