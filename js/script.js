@@ -242,7 +242,19 @@ const showGrid = (data, img_urls) => {
 </button>`;
   document.querySelector('.js-container').innerHTML = html;
   listenToClickGrid(data, img_urls);
+  listenToTooltip();
   listenToBonus();
+};
+
+const listenToTooltip = () => {
+  document.body.addEventListener('touchstart', function(e) {
+    var activeElement = document.activeElement;
+    if (activeElement.tagName === "INPUT" || activeElement.tagName === "TEXTAREA") {
+        if (e.target !== activeElement) {
+            activeElement.blur();
+        }
+    }
+});
 };
 
 const getArtist = async (id) => {
