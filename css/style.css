@@ -573,122 +573,26 @@ button {
     Media Queries
     -------------
 */
-@media (max-width: 330px) {
+@media (max-width: 1400px) {
   .grid {
-    grid-template-columns: repeat(1, 1fr);
-    .grid-bonus {
-      display: none;
-    }
-  }
-}
-
-@media (max-width: 370px) {
-  .modal {
-    padding: 1rem;
-  }
-
-  .artist-nr {
-    margin-top: 2rem;
-    font-size: var(--font-size-l-xsm);
-  }
-
-  .artist-nr-info {
-    font-size: var(--font-size-s-xsm);
-  }
-
-  .artist-name {
-    font-size: var(--font-size-s-t);
-  }
-
-  .artist-genres {
-    font-size: var(--font-size-s-xsm);
-  }
-
-  .artist-song {
-    padding: 2.5rem 0;
-  }
-
-  .artist-song-name {
-    font-size: var(--font-size-s-xsm);
-  }
-
-  .artist-statistics-title {
-    font-size: var(--font-size-s-m);
-  }
-
-  .tooltip .tooltiptext {
-    font-size: var(--font-size-xs-m);
-    padding: 0.625rem;
-    width: 75vw;
-  }
-
-  .artist-followers,
-  .artist-popularity {
-    font-size: var(--font-size-s-xsm);
-  }
-}
-
-@media (max-width: 576px) {
-  .loader {
-    position: fixed;
-  }
-
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    .grid-bonus {
-      display: none;
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  .artist-nr {
-    margin-top: 2rem;
-    font-size: var(--font-size-l-m);
-  }
-
-  .artist-nr-info {
-    font-size: var(--font-size-s-m);
-  }
-
-  .artist-name {
-    font-size: var(--font-size-m-xsm);
-  }
-
-  .artist-genres {
-    font-size: var(--font-size-s-m);
-  }
-
-  .artist-song-name {
-    font-size: var(--font-size-s-m);
-  }
-
-  .artist-statistics-title {
-    font-size: var(--font-size-s-t);
-  }
-
-  .tooltip .tooltiptext {
-    font-size: var(--font-size-s-xsm);
-    padding: 0.75rem;
-    width: 70vw;
-  }
-
-  .artist-followers,
-  .artist-popularity {
-    font-size: var(--font-size-s-m);
-  }
-}
-
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     .grid-bonus {
       display: inline-block;
-      grid-column: span 1;
+      grid-column: span 2;
       .bonus-img {
-        aspect-ratio: 1/1;
+        aspect-ratio: 2/1;
       }
     }
+  }
+
+  .artist-img {
+    max-width: 40vw;
+  }
+}
+
+@media (min-width: 1025px) {
+  .modal-body {
+    height: 100%;
   }
 }
 
@@ -773,25 +677,121 @@ button {
   }
 }
 
-@media (min-width: 1025px) {
-  .modal-body {
-    height: 100%;
-  }
-}
-
-@media (max-width: 1400px) {
+@media (max-width: 768px) {
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     .grid-bonus {
       display: inline-block;
-      grid-column: span 2;
+      grid-column: span 1;
       .bonus-img {
-        aspect-ratio: 2/1;
+        aspect-ratio: 1/1;
       }
     }
   }
+}
 
-  .artist-img {
-    max-width: 40vw;
+@media (max-width: 700px) {
+  .artist-nr {
+    margin-top: 2rem;
+    font-size: var(--font-size-l-m);
+  }
+
+  .artist-nr-info {
+    font-size: var(--font-size-s-m);
+  }
+
+  .artist-name {
+    font-size: var(--font-size-m-xsm);
+  }
+
+  .artist-genres {
+    font-size: var(--font-size-s-m);
+  }
+
+  .artist-song-name {
+    font-size: var(--font-size-s-m);
+  }
+
+  .artist-statistics-title {
+    font-size: var(--font-size-s-t);
+  }
+
+  .tooltip .tooltiptext {
+    font-size: var(--font-size-s-xsm);
+    padding: 0.75rem;
+    width: 70vw;
+  }
+
+  .artist-followers,
+  .artist-popularity {
+    font-size: var(--font-size-s-m);
+  }
+}
+
+@media (max-width: 576px) {
+  .loader {
+    position: fixed;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    .grid-bonus {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 370px) {
+  .modal {
+    padding: 1rem;
+  }
+
+  .artist-nr {
+    margin-top: 2rem;
+    font-size: var(--font-size-l-xsm);
+  }
+
+  .artist-nr-info {
+    font-size: var(--font-size-s-xsm);
+  }
+
+  .artist-name {
+    font-size: var(--font-size-s-t);
+  }
+
+  .artist-genres {
+    font-size: var(--font-size-s-xsm);
+  }
+
+  .artist-song {
+    padding: 2.5rem 0;
+  }
+
+  .artist-song-name {
+    font-size: var(--font-size-s-xsm);
+  }
+
+  .artist-statistics-title {
+    font-size: var(--font-size-s-m);
+  }
+
+  .tooltip .tooltiptext {
+    font-size: var(--font-size-xs-m);
+    padding: 0.625rem;
+    width: 75vw;
+  }
+
+  .artist-followers,
+  .artist-popularity {
+    font-size: var(--font-size-s-xsm);
+  }
+}
+
+@media (max-width: 330px) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
+    .grid-bonus {
+      display: none;
+    }
   }
 }
