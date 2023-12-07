@@ -1,22 +1,4 @@
 /*---------------------------------------/*
- # FONTS
-/*---------------------------------------*/
-@font-face {
-  font-family: 'Geist-Regular';
-  src: url('../fonts/Geist-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Geist-Bold';
-  src: url('../fonts/Geist-Bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Geist-UltraBlack';
-  src: url('../fonts/Geist-UltraBlack.woff2') format('woff2');
-}
-
-/*---------------------------------------/*
  # VARIABLES
 /*---------------------------------------*/
 :root {
@@ -42,6 +24,30 @@
 /*---------------------------------------/*
  # GENERIC
 /*---------------------------------------*/
+@font-face {
+  font-family: 'Geist-Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/Geist-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist-Bold';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/Geist-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist-UltraBlack';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../fonts/Geist-UltraBlack.woff2') format('woff2');
+}
+
 html {
   font-family: 'Geist-Regular', Helvetica, arial, sans-serif;
   font-size: 1rem;
