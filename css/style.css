@@ -242,15 +242,10 @@ button {
   display: inline-block;
 }
 
-.grid-artist:focus,
-.grid-bonus:focus {
+.grid-artist:focus-visible,
+.grid-bonus:focus-visible {
   outline: solid 8px var(--green);
   outline-offset: -8px;
-}
-
-:focus:not(:focus-visible) {
-  outline: 0;
-  box-shadow: none;
 }
 
 .grid-artist::after,
