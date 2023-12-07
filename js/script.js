@@ -108,7 +108,7 @@ const showModal = (data, img_urls, id, nr, name) => {
   document.querySelector('.artist-img').innerHTML = `<img src="${img_urls[nr - 1]}" alt="${name}">`;
   document.querySelector('.artist-name').innerHTML = name;
   document.querySelector('.artist-nr').innerHTML = nr;
-  document.querySelector('.artist-song-img').innerHTML = `<img src="${data[nr - 1].track.album.images[0].url}" alt="Album cover for song: ${data[nr - 1].track.name}">`;
+  document.querySelector('.artist-song-img').innerHTML = `<img src="${data[nr - 1].track.album.images[1].url}" alt="Album cover for song: ${data[nr - 1].track.name}">`;
   document.querySelector('.artist-song-name').innerHTML = data[nr - 1].track.name;
   document.querySelector('.artist-song-preview').innerHTML = `
   <button title="Play/Stop Preview" aria-label="auto" aria-live="polite" class="o-button-reset toggle js-toggle">
@@ -166,12 +166,14 @@ const getGridData = async () => {
     });
 
     const data = response.data;
-    let img_urls = [];
+    let img_urls_small = [];
+    let img_urls_big = [];
     for (const track of data.tracks.items) {
       const data = await getArtist(track.track.artists[0].id);
-      img_urls.push(data.images[0].url);
+      img_urls_small.push(data.images[1].url);
+      img_urls_big.push(data.images[0].url);
     }
-    showGrid(data.tracks.items, img_urls);
+    showGrid(data.tracks.items, img_urls_small, img_urls_big);
     setTimeout(function () {
       document.querySelector('.loader').classList.add('u-hidden');
       document.querySelector('.js-container').classList.remove('u-hidden');
@@ -227,11 +229,11 @@ const showModalBonus = () => {
   });
 };
 
-const showGrid = (data, img_urls) => {
+const showGrid = (data, img_urls_small, img_urls_big) => {
   let html = '';
   let i = 0;
   console.info(data);
-  img_urls.forEach((url) => {
+  img_urls_small.forEach((url) => {
     i++;
     html += `<button class="grid-artist o-button-reset" data-nr="${i}" data-name="${data[i - 1].track.artists[0].name}" data-id="${data[i - 1].track.artists[0].id}">
             <img src="${url}" alt="${data[i - 1].track.artists[0].name}">
@@ -241,7 +243,7 @@ const showGrid = (data, img_urls) => {
   <img class="bonus-img" src="./img/the-halal-design-studio-HK06CdtW2rg-unsplash.jpg" alt="Bonus Artist">
 </button>`;
   document.querySelector('.js-container').innerHTML = html;
-  listenToClickGrid(data, img_urls);
+  listenToClickGrid(data, img_urls_big);
   listenToTooltip();
   listenToBonus();
 };
