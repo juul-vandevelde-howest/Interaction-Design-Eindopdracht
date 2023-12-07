@@ -134,6 +134,15 @@ const stopMedia = () => {
 // #endregion
 
 // #region ***  Data Access - get___                     ***********
+const getAccessToken = async () => {
+  try {
+    const response = await axios(authOptions);
+    localStorage.setItem('access_token', response.data.access_token);
+  } catch (error) {
+    console.error('Error fetching access token:', error.message);
+  }
+};
+
 const getGridData = async () => {
   try {
     const response = await axios.get('https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M', {
@@ -141,7 +150,6 @@ const getGridData = async () => {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     });
-
     const data = response.data;
     let img_urls_small = [];
     let img_urls_big = [];
@@ -289,20 +297,14 @@ const listenToBonus = () => {
 // #endregion
 
 // #region ***  Init / DOMContentLoaded                  ***********
-const init = function(){
+const init = function (func) {
   if (!localStorage.getItem('access_token')) {
-    axios(authOptions)
-      .then((response) => {
-        localStorage.setItem('access_token', response.data.access_token);
-        getGridData();
-      })
-      .catch((error) => {
-        console.error('Error fetching access token:', error.message);
-      });
+    getAccessToken();
+    getGridData();
   } else {
     getGridData();
   }
-}
+};
 
-document.addEventListener('DOMContentLoaded',init);
+document.addEventListener('DOMContentLoaded', init);
 // #endregion
