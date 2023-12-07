@@ -174,10 +174,8 @@ const getGridData = async () => {
       img_urls_big.push(data.images[0].url);
     }
     showGrid(data.tracks.items, img_urls_small, img_urls_big);
-    setTimeout(function () {
-      document.querySelector('.loader').classList.add('u-hidden');
-      document.querySelector('.js-container').classList.remove('u-hidden');
-    }, 1000);
+    document.querySelector('.loader').classList.add('u-hidden');
+    document.querySelector('.js-container').classList.remove('u-hidden');
   } catch (error) {
     console.error('Error:', error);
     localStorage.removeItem('access_token');
