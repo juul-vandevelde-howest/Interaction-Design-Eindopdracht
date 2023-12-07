@@ -297,7 +297,7 @@ const listenToBonus = () => {
 // #endregion
 
 // #region ***  Init / DOMContentLoaded                  ***********
-const init = function (func) {
+const init = function () {
   if (!localStorage.getItem('access_token')) {
     getAccessToken();
     getGridData();
