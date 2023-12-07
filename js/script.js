@@ -138,6 +138,7 @@ const getAccessToken = async () => {
   try {
     const response = await axios(authOptions);
     localStorage.setItem('access_token', response.data.access_token);
+    getGridData();
   } catch (error) {
     console.error('Error fetching access token:', error.message);
   }
@@ -300,7 +301,6 @@ const listenToBonus = () => {
 const init = function () {
   if (!localStorage.getItem('access_token')) {
     getAccessToken();
-    getGridData();
   } else {
     getGridData();
   }
