@@ -476,7 +476,7 @@ button {
   width: 40vw;
 }
 
-.tooltip:hover .tooltiptext {
+.tooltip-btn:hover + .tooltiptext {
   visibility: visible;
 }
 
