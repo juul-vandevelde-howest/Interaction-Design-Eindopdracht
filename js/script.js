@@ -107,6 +107,7 @@ const playMusic = (preview_url) => {
     toggle.setAttribute('disabled', true);
     toggle.setAttribute('aria-disabled', true);
     toggle.setAttribute('aria-label', 'No preview available');
+    toggle.setAttribute('title', 'No preview available');
   }
   currentlyPlaying = music;
   toggle.addEventListener('click', function () {
