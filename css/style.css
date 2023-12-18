@@ -377,6 +377,9 @@ button {
   font-size: var(--font-size-m-xsm);
 }
 
+.artist-song-preview {
+  flex-shrink: 0;
+}
 /*
     The play preview btn
 */
@@ -791,6 +794,9 @@ button {
   .artist-followers,
   .artist-popularity {
     font-size: var(--font-size-s-xsm);
+  }
+  :root {
+    --preview-icon-size: 2rem;
   }
 }
 
