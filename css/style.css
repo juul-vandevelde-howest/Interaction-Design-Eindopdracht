@@ -459,6 +459,8 @@ button {
   font-size: var(--font-size-s-t);
   position: relative;
   display: inline-block;
+  width: 2rem;
+  height: 2rem;
 }
 
 .tooltip .tooltiptext {
@@ -725,6 +727,11 @@ button {
   .artist-followers,
   .artist-popularity {
     font-size: var(--font-size-s-m);
+  }
+
+  .tooltip {
+    height: 1.5rem;
+    width: 1.5rem;
   }
 }
 
