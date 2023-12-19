@@ -387,15 +387,16 @@ button {
   display: grid;
   place-items: center;
   cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s ease;
 }
 
 .toggle:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  display: none;
 }
 
-.toggle-info {
-  opacity: 0.5;
+.toggle:hover {
+  opacity: 0.9;
 }
 
 .icon {
@@ -479,14 +480,13 @@ button {
   font-size: var(--font-size-s-t);
   text-align: left;
   width: 40vw;
+  opacity: 0;
+  transition: opacity .3s ease;
 }
 
-.tooltip-btn:hover + .tooltiptext {
+.tooltip-btn:hover + .tooltiptext, .tooltip-btn:focus-visible + .tooltiptext  {
   visibility: visible;
-}
-
-.tooltip-btn:focus-visible + .tooltiptext {
-  visibility: visible;
+  opacity: 1;
 }
 
 /*
@@ -530,6 +530,18 @@ button {
 
 .artist-followers {
   margin: 2rem 0;
+}
+
+/*
+    Hover effect on btns
+*/
+.close-btn, .tooltip-btn, .prev-btn, .next-btn {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.close-btn:hover, .tooltip-btn:hover, .prev-btn:hover, .next-btn:hover {
+  opacity: 0.8;
 }
 
 /*
