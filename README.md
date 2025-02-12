@@ -1,2 +1,3 @@
 # Spotify Playlist Viewer
-Visit the live version at https://juul-vandevelde-howest.github.io/Interaction-Design-Eindopdracht/
+
+**Note:** This site is no longer available because Spotify changed their API.
